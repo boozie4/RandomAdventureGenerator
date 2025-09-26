@@ -1,20 +1,3 @@
-# Random Adventure Generator
-
-Random Adventure Generator
- 
-Low-Fidelity Wireframes (Text Layouts)
-Home Screen
-------------------------------------------------- | Random Adventure Generator | | | |
-[ Give me an adventure! ] | | | | ------------------------------------------- | | | Try
-a new restaurant within 5 miles | | | ------------------------------------------- | | |
-| ■ (Home) ❤■ (Saved) ■■ (Categories) |
--------------------------------------------------
-Categories Screen
-------------------------------------------------- | Adventure Categories | | | | [
-Physical ] [ Creative ] [ Social ] [ Chill ] | | | |
-------------------------------------------- | | | Watch a sunset | | |
-------------------------------------------- | | | | ■ (Home) ❤■ (Saved) ■■
-(Categories) | -------------------------------------------------
 # Random Adventure Generator — Wireframes & Mockups
 
 This document contains the low-fidelity wireframes and high-fidelity mockup specifications for the Random Adventure Generator prototype. It is formatted for clear rendering (GitHub / VS Code preview).
@@ -29,13 +12,13 @@ Below are simple, monospace wireframes that capture layout and primary interacti
 +---------------------------------------------+
 | Random Adventure Generator                  |
 |                                             |
-|                [ Give me an adventure! ]    |
+|           [ Give me an adventure! ]         |
 |                                             |
 |  -----------------------------------------  |
 |  | Try a new restaurant within 5 miles   |  |
 |  -----------------------------------------  |
 |                                             |
-|  [ Home ]   [ Saved ]   [ Categories ]      |
+|    [ Home ]   [ Saved ]   [ Categories ]    |
 ---------------------------------------------+
 ```
 
@@ -117,18 +100,10 @@ These values capture the look-and-feel to guide visual design and CSS implementa
 - `styles.css` — stylesheet used by the prototype.
 - `Random_Adventure_Generator_Wireframes_and_Mockups.pdf` — original mockups and notes.
 
-If you want images included in the markdown (PNG/JPG), add them to an `assets/` directory and reference them with `![alt](assets/filename.png)`.
-
 ## Implementation notes / next steps
 
 - Convert the wireframe cards to HTML components (semantic HTML sections or `<article>` for cards).
 - Add a small JavaScript module to produce random adventures and populate the Adventure Box.
-- Improve accessibility: ensure buttons are keyboard-focusable and provide ARIA labels for nav icons.
-
----
-
-If you'd like, I can also:
-- Add a tiny `scripts.js` that implements a simple random generator and hook it into `index.html`.
-- Create an `assets/` folder and export sample mockup images into it, then update this markdown with inline previews.
+----
 
 
