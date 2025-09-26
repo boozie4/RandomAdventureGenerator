@@ -20,45 +20,35 @@
     <section id="home" class="screen active">
       <h1>Random Adventure Generator</h1>
       <button class="main-btn">Give me an adventure!</button>
-      <div class="adventure-box">Try a new restaurant within 5 miles</div>
+      <div class="adventure-box">
+        <span class="adventure-text" aria-live="polite">Try a new restaurant within 5 miles</span>
+        <button class="save-btn" aria-label="Save adventure">♡</button>
+      </div>
     </section>
 
     <!-- Categories Screen -->
     <section id="categories" class="screen">
       <h1>Adventure Categories</h1>
       <div class="category-buttons">
-        <button>Physical</button>
-        <button>Creative</button>
-        <button>Social</button>
-        <button>Chill</button>
+        <button data-category="Physical">Physical</button>
+        <button data-category="Creative">Creative</button>
+        <button data-category="Social">Social</button>
+        <button data-category="Chill">Chill</button>
       </div>
-      <div class="adventure-box">Watch a sunset</div>
+      <div class="adventure-box">
+        <span class="adventure-text" aria-live="polite">Watch a sunset</span>
+        <button class="save-btn" aria-label="Save adventure">♡</button>
+      </div>
     </section>
 
     <!-- Saved Adventures Screen -->
     <section id="saved" class="screen">
       <h1>Saved Adventures</h1>
       <div class="saved-list">
-        <div class="saved-item">Try a new restaurant within 5 miles ❤️</div>
-        <div class="saved-item">Visit a local museum ❤️</div>
-        <div class="saved-item">Listen to a new podcast ❤️</div>
-        <div class="saved-item">Take a walk in the park ❤️</div>
+        <!-- saved items populated by scripts.js -->
       </div>
     </section>
   </main>
-
-  <script>
-    // Simple screen navigation
-    const navButtons = document.querySelectorAll('.nav-btn');
-    const screens = document.querySelectorAll('.screen');
-    navButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        screens.forEach(s => s.classList.remove('active'));
-        navButtons.forEach(b => b.classList.remove('active'));
-        document.getElementById(btn.dataset.screen).classList.add('active');
-        btn.classList.add('active');
-      });
-    });
-  </script>
+  <script src="scripts.js"></script>
 </body>
 </html>
