@@ -1,0 +1,95 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: #fdfdfd;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.screen {
+  display: none;
+  padding: 1rem;
+}
+
+.screen.active {
+  display: block;
+}
+
+.main-btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  margin: 1rem 0;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.adventure-box {
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 2px solid #333;
+  border-radius: 8px;
+  max-width: 300px;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.category-buttons button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.saved-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.saved-item {
+  border: 2px solid #333;
+  padding: 0.8rem;
+  border-radius: 8px;
+  width: 80%;
+  text-align: left;
+  background: #fff;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  border-top: 2px solid #ccc;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.nav-btn.active {
+  opacity: 1;
+}

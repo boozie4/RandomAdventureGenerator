@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Adventure Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-screen="home">🏠</button>
+    <button class="nav-btn" data-screen="saved">❤️</button>
+    <button class="nav-btn" data-screen="categories">⬇️</button>
+  </nav>
+
+  <!-- Screens -->
+  <main>
+    <!-- Home Screen -->
+    <section id="home" class="screen active">
+      <h1>Random Adventure Generator</h1>
+      <button class="main-btn">Give me an adventure!</button>
+      <div class="adventure-box">Try a new restaurant within 5 miles</div>
+    </section>
+
+    <!-- Categories Screen -->
+    <section id="categories" class="screen">
+      <h1>Adventure Categories</h1>
+      <div class="category-buttons">
+        <button>Physical</button>
+        <button>Creative</button>
+        <button>Social</button>
+        <button>Chill</button>
+      </div>
+      <div class="adventure-box">Watch a sunset</div>
+    </section>
+
+    <!-- Saved Adventures Screen -->
+    <section id="saved" class="screen">
+      <h1>Saved Adventures</h1>
+      <div class="saved-list">
+        <div class="saved-item">Try a new restaurant within 5 miles ❤️</div>
+        <div class="saved-item">Visit a local museum ❤️</div>
+        <div class="saved-item">Listen to a new podcast ❤️</div>
+        <div class="saved-item">Take a walk in the park ❤️</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Simple screen navigation
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const screens = document.querySelectorAll('.screen');
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        screens.forEach(s => s.classList.remove('active'));
+        navButtons.forEach(b => b.classList.remove('active'));
+        document.getElementById(btn.dataset.screen).classList.add('active');
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
