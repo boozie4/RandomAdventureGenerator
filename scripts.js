@@ -11,8 +11,8 @@ Features:
 (() => {
   const NAV_KEY = 'rag_saved_adventures_v1';
 
-  // Simple adventure pool (expandable)
-  const ADVENTURES = [
+  // Simple adventure pool (expandable). Will be replaced by server data if available.
+  let ADVENTURES = [
     { text: 'Try a new restaurant within 5 miles', categories: ['Social', 'Chill'] },
     { text: 'Visit a local museum', categories: ['Creative', 'Social'] },
     { text: 'Listen to a new podcast', categories: ['Chill'] },
@@ -47,8 +47,24 @@ Features:
     });
   });
 
-  // Generate random adventure (optionally by category)
-  function randomAdventure(category) {
+  // Generate random adventure (optionally by category).
+  // Tries to use server API first; falls back to local ADVENTURES.
+  async function randomAdventure(category) {
+    // Try API fetch
+    try {
+      const url = category ? `/api/adventures?category=${encodeURIComponent(category)}` : '/api/adventures';
+      const res = await fetch(url);
+      if (res.ok) {
+        const list = await res.json();
+        if (!Array.isArray(list) || list.length === 0) return { text: 'No adventures found.' };
+        const i = Math.floor(Math.random() * list.length);
+        return list[i];
+      }
+    } catch (e) {
+      // ignore network errors and fall back to local list
+      // console.warn('API fetch failed, falling back to local pool', e);
+    }
+
     const pool = category ? ADVENTURES.filter(a => a.categories.includes(category)) : ADVENTURES;
     if (pool.length === 0) return { text: 'No adventures found for this category.' };
     const i = Math.floor(Math.random() * pool.length);
