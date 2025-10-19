@@ -1,27 +1,27 @@
-FROM node:20-alpine
+FROM node:20.12.2-slim
 
-# Create app directory
-WORKDIR /app
+# Use a stable working directory
+WORKDIR /usr/src/app
+
+# Set production environment to avoid installing dev deps unintentionally
+ENV NODE_ENV=production
 
 # Copy package files first to leverage Docker cache for installs
 COPY package*.json ./
 
-# Use deterministic install when a lockfile is present, otherwise install production deps
-# Avoid running `npm audit fix --force` during image build as it can upgrade packages
-# unexpectedly and introduce breaking changes. Instead produce a reproducible image
-# by using package-lock.json (commit it) and `npm ci`.
+# Deterministic install: use package-lock.json when present, otherwise install production deps
+# Do not run `npm audit fix --force` during build - handle auditing and upgrades separately.
 RUN if [ -f package-lock.json ]; then \
-			npm ci --omit=dev; \
-		else \
-			npm install --omit=dev; \
-		fi
+      npm ci --omit=dev --no-audit --no-fund; \
+    else \
+      npm install --omit=dev --no-audit --no-fund; \
+    fi
 
-# Copy app source
+# Copy rest of application
 COPY . .
 
-# Run as non-root for better security (create app user and own files)
-# Debian-based images use groupadd/useradd
-RUN groupadd -r app && useradd -r -g app -d /app -s /bin/false app && chown -R app:app /app
+# Create a non-root user and set proper permissions
+RUN groupadd -r app && useradd -r -g app -d /usr/src/app -s /usr/sbin/nologin app && chown -R app:app /usr/src/app
 USER app
 
 EXPOSE 3000
