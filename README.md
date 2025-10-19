@@ -89,3 +89,55 @@ When the containers are up the backend will be reachable at `http://localhost:30
 
 If you want, I can:
 - Add endpoints for updating/deleting adventures and returning random adventures directly from the API.
+
+## Capacitor (recommended for native wrappers)
+
+To create native shells using Capacitor (recommended over Cordova):
+
+1. Run the helper script to install Capacitor and add platforms. By default it will add Android; set `-ios true` to add iOS (requires macOS):
+
+```powershell
+.
+\scripts\init-capacitor.ps1 -android true -ios false
+```
+
+2. After installing, copy your web assets into the native projects:
+
+```powershell
+# If you use a bundler, run its build first. For a static prototype, just copy files.
+npx cap copy
+npx cap open android   # open Android Studio
+# on macOS: npx cap open ios
+```
+
+Notes:
+- Capacitor keeps your web app as the web layer and generates native projects you can open in Android Studio / Xcode.
+- For local development, use `npx cap copy` after any changes to the web files. For a production build, produce an optimized build first.
+
+Cordova (alternative)
+
+If you prefer to use Cordova instead of Capacitor, there is a helper script to scaffold a Cordova project and copy your web assets into `mobile/www`:
+
+```powershell
+.
+\scripts\init-cordova.ps1 -addAndroid
+```
+
+That script will:
+- Create `mobile/` using `npx cordova create` (if needed)
+- Copy `index.html`, `styles.css`, `scripts.js`, `mobile-config.js` and `assets/` (if present) into `mobile/www`
+- Add Android and/or iOS platforms if requested
+- Install common plugins (whitelist, splashscreen, statusbar, network information)
+
+After running the script, build and run as usual:
+
+```powershell
+cd mobile
+npx cordova build android
+npx cordova run android --device
+```
+
+Notes:
+- Cordova uses `config.xml` for app configuration. The helper creates a default project; edit `mobile/config.xml` to set permissions, ATS exceptions, or whitelist rules.
+- Capacitor is recommended for modern workflows, but Cordova remains a viable option if you need specific plugins or prefer its ecosystem.
+

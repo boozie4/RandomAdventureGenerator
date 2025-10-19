@@ -52,7 +52,8 @@ Features:
   async function randomAdventure(category) {
     // Try API fetch
     try {
-      const url = category ? `/api/adventures?category=${encodeURIComponent(category)}` : '/api/adventures';
+      const base = getApiBase();
+      const url = category ? `${base}/api/adventures?category=${encodeURIComponent(category)}` : `${base}/api/adventures`;
       const res = await fetch(url);
       if (res.ok) {
         const list = await res.json();
@@ -71,6 +72,13 @@ Features:
     return pool[i];
   }
 
+  // Resolve API base for device/emulator runs. If window.API_BASE is set (via mobile-config.js)
+  // use that; otherwise use empty string so relative paths work in browser.
+  function getApiBase() {
+    if (typeof window !== 'undefined' && window.API_BASE) return window.API_BASE.replace(/\/$/, '');
+    return '';
+  }
+
   // Update a given adventure-box element with an adventure object
   function updateAdventureBox(boxEl, adventure) {
     const textEl = boxEl.querySelector('.adventure-text');
@@ -84,8 +92,8 @@ Features:
 
   // Wire main CTA
   if (mainBtn) {
-    mainBtn.addEventListener('click', () => {
-      const adv = randomAdventure();
+    mainBtn.addEventListener('click', async () => {
+      const adv = await randomAdventure();
       const homeBox = document.querySelector('#home .adventure-box');
       updateAdventureBox(homeBox, adv);
     });
@@ -93,9 +101,9 @@ Features:
 
   // Wire category buttons (generate within category)
   categoryButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       const cat = btn.dataset.category;
-      const adv = randomAdventure(cat);
+      const adv = await randomAdventure(cat);
       const catBox = document.querySelector('#categories .adventure-box');
       updateAdventureBox(catBox, adv);
     });
