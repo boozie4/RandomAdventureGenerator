@@ -1,4 +1,4 @@
-FROM node:20.12.2-slim
+FROM node:20.12-alpine
 
 # Use a stable working directory
 WORKDIR /usr/src/app
